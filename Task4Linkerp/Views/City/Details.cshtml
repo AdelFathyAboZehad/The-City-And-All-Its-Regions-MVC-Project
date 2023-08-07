@@ -1,0 +1,220 @@
+﻿@model Task4Linkerp.ViewModel.City.DetailsCityViewModel
+@inject IViewLocalizer localizer
+
+@{
+    ViewData["Title"] = "Details";
+    SelectList RegionAR = new SelectList(ViewBag.Regions, "Id", "NameAR");
+    SelectList RegionEN = new SelectList(ViewBag.Regions, "Id", "NameEN");
+    ICollection<Region> Regions = ViewBag.Regions;
+}
+<div style="text-align:right" class="mb-2">
+    <a asp-action="Index" class="btn"><i class="fa-solid fa-angles-left"></i>@localizer["Back to List"]</a>
+</div>
+
+<div class="container">
+    <div class=" row justify-content-center my-2 ">
+        <div class="card col-lg-6 col-md-8 col-sm-10 py-3 mt-5 ">
+            <div style="text-align: center;">
+               
+                <h2> @Html.DisplayFor(model => model.NameEN)</h2>
+            </div>
+            <h4> @Html.DisplayNameFor(model => model.Code) : @Html.DisplayFor(model => model.Code)</h4>
+            <h4> @Html.DisplayNameFor(model => model.NameEN) :  @Html.DisplayFor(model => model.NameEN)</h4>
+            <h4> @Html.DisplayNameFor(model => model.NameAR): @Html.DisplayFor(model => model.NameAR)</h4>
+            <h4>  @Html.DisplayNameFor(model => model.Active): @Html.DisplayFor(model => model.Active)</h4>
+            <h4>  @Html.DisplayNameFor(model => model.NameAR): @Html.DisplayFor(model => model.NameAR)</h4>
+            @*Address*@
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <select asp-for="Id" class="form-control" asp-items="RegionEN">
+                </select>
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+              <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <select asp-for="Id" class="form-control" asp-items="RegionAR">
+                </select>
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+          
+       
+        </div>
+    </div>
+</div>
+<style>
+    body {
+        background-color: #F0F1F3;
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 25px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, .5);
+    }
+
+    h6,
+    h1 {
+        color: #FAB005;
+        font-family: cursive;
+    }
+
+    label,
+    h4,
+    h2,
+    p {
+        font-family: cursive;
+        color: #183153;
+    }
+
+    input {
+        border: 10px #183153;
+    }
+
+    .icon {
+        position: absolute;
+        top: calc(43%);
+        left: 1.8rem;
+    }
+
+    .iconn {
+        position: absolute;
+        top: calc(58%);
+        left: 1.8rem;
+    }
+
+
+
+    button {
+        border-radius: 10px;
+        background-color: #FFD43B;
+        height: 50px;
+        border-top: 2px solid #183153;
+        border-left: 2px solid #183153;
+        border-right: 2px solid #183153;
+        border-bottom: 8px solid #183153;
+        font-family: cursive;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .btn {
+        border-radius: 10px;
+        background-color: #63E6BE;
+        color: #183153;
+        height: 50px;
+        border-top: 2px solid #183153;
+        border-left: 2px solid #183153;
+        border-right: 2px solid #183153;
+        border-bottom: 8px solid #183153;
+        font-family: cursive;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+
+        button:hover {
+            background-color: #FAB005;
+        }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/lib/jquery/dist/jquery.js"></script>
+     <style>
+        .btn {
+            color: white;
+            font-style: italic;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+    </style>
+    
+</head>
+<body>
+    <table class="table table-striped table-bordered text-center table-hover " style="box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);font-style:italic;font-size:larger">
+
+        <thead>
+            <tr class="bg-info text-light">
+                     <th>
+                        @Html.DisplayNameFor(Regions => Regions.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Regions => Regions.Code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Regions => Regions.NameEN)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(Regions =>Regions.NameAR)
+                    </th>
+            </tr>
+
+               
+           
+        </thead>
+        <tbody>
+            @foreach (var item in Regions)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameEN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NameAR)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+   
+    <script>
+        $(document).ready(function () {
+            $('.delete').click(function (e) {
+                e.preventDefault();
+                
+                var id = $(this).attr('data-id');
+                console.log(id);
+                swal({
+                   
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this data!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                url: "/ShoppingMethods/DeleteConfirmed?id=" + id,
+                                type: "POST",
+                                success: function () {
+                                    swal("Poof! Your data has been deleted!", {
+                                        icon: "success",
+                                    }).then((result) => {
+                                        location.reload();
+                                    });
+                                },
+                                error: function () {
+                                    swal("Oops", "We couldn't connect to the server!", "error");
+                                }
+                            });
+                        } else {
+                            swal("Your data is safe!");
+                        }
+                    });
+            });
+        });
+    </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>
